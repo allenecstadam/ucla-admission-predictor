@@ -53,7 +53,7 @@ The app allows users to input their profile and predicts their chance of admissi
 To run:
 
 ```bash
-streamlit run src/app.py
+streamlit run app.py
 ```
 
 ---
@@ -82,7 +82,7 @@ python src/main.py
 4. Launch the Streamlit app:
 
 ```bash
-streamlit run src/app.py
+[https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/](https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/)
 ```
 
 ---
