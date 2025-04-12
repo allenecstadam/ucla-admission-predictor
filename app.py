@@ -61,7 +61,7 @@ fig = go.Figure(data=[
 
 fig.update_layout(
     title="Entered Admission Inputs",
-    plot_bgcolor='white',
+    plot_bgcolor='black',
     paper_bgcolor='black',
     font=dict(color='black', size=14),
     yaxis=dict(title='Value'),
