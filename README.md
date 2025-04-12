@@ -52,9 +52,9 @@ The app allows users to input their profile and predicts their chance of admissi
 
 To run:
 
-```
-[Streamlit App](https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/)
-```
+
+[Streamlit](https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/)
+
 
 ---
 
@@ -107,7 +107,7 @@ joblib
 
 - Ensure the model file (`model.pkl`) is saved inside the `models/` directory.
 - Ensure `data/Admission.csv` exists or is uploaded via the Streamlit interface.
-- The project is compatible with deployment on [Streamlit Cloud](https://streamlit.io/cloud).
+- The project is compatible with deployment on [Streamlit Cloud](https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/).
 
 ---
 
