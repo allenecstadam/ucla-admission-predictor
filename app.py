@@ -1,0 +1,82 @@
+
+import streamlit as st
+import joblib
+import numpy as np
+import pandas as pd
+import os
+import plotly.graph_objects as go
+
+st.set_page_config(page_title="🎓 UCLA Admission Predictor", layout="centered")
+st.title("🎓 Neural Network Admission Predictor")
+
+# Load trained model
+model_path = 'models/admission_nn_model.pkl'
+if not os.path.exists(model_path):
+    st.error("❌ Model not found. Please train the model using `train.py`.")
+    st.stop()
+
+model = joblib.load(model_path)
+
+# Input form
+st.subheader("📋 Enter your academic profile:")
+
+gre = st.slider("GRE Score", 260, 340, 310)
+toefl = st.slider("TOEFL Score", 0, 120, 100)
+rating = st.selectbox("University Rating", [1, 2, 3, 4, 5], index=2)
+sop = st.slider("SOP Strength (1-5)", 1.0, 5.0, 3.0, step=0.5)
+lor = st.slider("LOR Strength (1-5)", 1.0, 5.0, 3.0, step=0.5)
+cgpa = st.slider("CGPA (out of 10)", 6.0, 10.0, 8.5, step=0.1)
+research = st.radio("Research Experience", ["Yes", "No"]) == "Yes"
+
+# One-hot encode categorical features
+input_dict = {
+    "GRE_Score": gre,
+    "TOEFL_Score": toefl,
+    "SOP": sop,
+    "LOR": lor,
+    "CGPA": cgpa,
+    "University_Rating_2": 1 if rating == 2 else 0,
+    "University_Rating_3": 1 if rating == 3 else 0,
+    "University_Rating_4": 1 if rating == 4 else 0,
+    "University_Rating_5": 1 if rating == 5 else 0,
+    "Research_1": 1 if research else 0
+}
+
+input_df = pd.DataFrame([input_dict])
+input_df = input_df.reindex(columns=model.feature_names_in_, fill_value=0)
+
+# Visualize input using neutral taupe palette
+st.subheader("📊 Input Summary (Taupe Color Scheme)")
+
+features = list(input_df.columns)
+values = input_df.values.flatten().tolist()
+color_palette = ['#D9CAB3', '#C8B6A6', '#A19882', '#8E806A', '#A88B73', '#B6A189', '#7E6A56',
+                 '#D9CAB3', '#C8B6A6', '#8E806A']  # Repeat for 10 features
+
+fig = go.Figure(data=[
+    go.Bar(
+        x=features,
+        y=values,
+        marker_color=color_palette
+    )
+])
+
+fig.update_layout(
+    title="Entered Admission Inputs",
+    plot_bgcolor='white',
+    paper_bgcolor='white',
+    font=dict(color='black', size=14),
+    yaxis=dict(title='Value'),
+    xaxis=dict(title='Feature'),
+    margin=dict(t=40, l=20, r=20, b=40)
+)
+
+st.plotly_chart(fig)
+
+# Predict admission
+if st.button("🔮 Predict Admission"):
+    prediction = model.predict(input_df)[0]
+    label = "🎉 High Chance of Admission!" if prediction == 1 else "❌ Low Chance of Admission"
+
+    st.subheader("📢 Prediction Result:")
+    st.markdown(f"### {label}")
