@@ -20,7 +20,7 @@ model = joblib.load(model_path)
 # Input form
 st.subheader("📋 Enter your academic profile:")
 
-gre = st.slider("GRE Score", 260, 340, 310)
+gre = st.slider("GRE Score", 120, 340, 310)
 toefl = st.slider("TOEFL Score", 0, 120, 100)
 rating = st.selectbox("University Rating", [1, 2, 3, 4, 5], index=2)
 sop = st.slider("SOP Strength (1-5)", 1.0, 5.0, 3.0, step=0.5)
@@ -50,14 +50,12 @@ st.subheader("📊 Input Summary (Taupe Color Scheme)")
 
 features = list(input_df.columns)
 values = input_df.values.flatten().tolist()
-color_palette = ['#D9CAB3', '#C8B6A6', '#A19882', '#8E806A', '#A88B73', '#B6A189', '#7E6A56',
-                 '#D9CAB3', '#C8B6A6', '#8E806A']  # Repeat for 10 features
 
 fig = go.Figure(data=[
     go.Bar(
         x=features,
         y=values,
-        marker_color=color_palette
+        marker_color=['#A0AEC0'] * len(features) 
     )
 ])
 
