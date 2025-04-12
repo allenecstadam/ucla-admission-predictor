@@ -55,7 +55,7 @@ fig = go.Figure(data=[
     go.Bar(
         x=features,
         y=values,
-        marker_color=['#A0AEC0'] * len(features) 
+        marker_color=['#D9CAB3'] * len(features) 
     )
 ])
 
