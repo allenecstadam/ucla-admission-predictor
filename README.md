@@ -53,7 +53,7 @@ The app allows users to input their profile and predicts their chance of admissi
 To run:
 
 ```
-[https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/](https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/)
+[Streamlit App](https://ucla-admission-predictor-jafmzcfy32df8lnakqowsp.streamlit.app/)
 ```
 
 ---
